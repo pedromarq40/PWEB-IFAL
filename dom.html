@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+        :root{
+            --cor-1: red;
+            --cor-2: orange;
+            --cor-3: yellow;
+        }
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            background-image: linear-gradient(45deg, var(--cor-1), var(--cor-2), var(--cor-3))
+        }
+        h1{
+            color: white
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="h1">OI</h1>
+    <h1 id="a">Estragou o código</h1>
+    <button onclick='mudar("1")'>Botão 1</button>
+    <button onclick='mudar("2")'>Botão 2</button>
+</body>
+<script>
+
+    var n = prompt('Qual seu nome? ')
+    var o = confirm('Quer que seu nome apareça na tela?')
+    var tag = document.getElementById('a')
+
+    if (o){
+        tag.innerText = `Boa Noite ${n}`
+    }
+
+    function mudar(tema){
+        let c1, c2, c3 
+        if(tema == '1'){
+            c1 = 'blue';
+            c2 = 'green';
+            c3 = 'yellow';
+        } else {
+            c1 = 'red';
+            c2 = 'orange';
+            c3 = 'yellow';
+        }
+        document.documentElement.style.setProperty("--cor-1", c1)
+        document.documentElement.style.setProperty("--cor-2", c2)
+        document.documentElement.style.setProperty("--cor-3", c3)
+    }
+    var n = confirm("Ta de dia?")
+    var tag = document.getElementById('h1')
+
+    if(n){
+        var n1 = confirm('Ta de manhã?')
+
+        if(n1){
+            tag.innerText = 'Bom Dia'
+        } else {
+            tag.innerText = 'Boa Tarde'
+        }
+    } else {
+        tag.innerText = 'Boa noite'
+    }
+    alert('Rubens >>>>>>>>>>>>>>>>> Kenji')
+
+</script>
+</html>

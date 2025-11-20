@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+            background-color: rgb(117, 117, 117);
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .corpo{
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+        }
+        button{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lista de Tarefas</h1>
+    </header>
+
+<div class="corpo">
+<div>
+    <form>
+        <label for="nome">Tarefa: </label>
+        <input id="nome" type="text">
+    </form>
+
+    <button onclick="adicionar()">Adicionar</button>
+    <button onclick="adicionar_prioridade()">Adicionar Com Prioridade</button>
+
+    <ul id="Lista"></ul>
+</div>
+
+<div>
+  <input type='number' id='op1'>
+  <select id="operador">
+    <option value="+">(+)</option>
+    <option value="-">(-)</option>
+    <option value="*">(*)</option>
+    <option value="/">(/)</option>
+    <option value='**'>(**)</option>
+  </select>
+  <input type='number' id='op2'><br>
+  <button onclick='resultado()'>Resultado: </button>
+  <button onclick='limpar2()'>Limpar </button>
+  
+  <p id='resultado'></p>
+</div>
+</div>
+
+<script>
+
+    let tarefas = []
+    let lista = document.getElementById('Lista')
+    let str = ''
+
+    function adicionar(){
+        let tarefa = document.getElementById('nome').value
+
+        if(tarefa != ''){
+            tarefas.push(tarefa)
+        }
+        for(var i = 0; i < tarefas.length; i++){
+            str += '<li id="li' + i + '">' + tarefas[i] + "</li>" + `<button onclick='concluir(${i})'>Concluir</button>`
+        }
+        lista.innerHTML = str
+        str = ''
+        tarefa = ''
+    }
+
+    function adicionar_prioridade(){
+        let tarefa = document.getElementById('nome').value
+    
+        if(tarefa != ''){
+            tarefas.unshift(tarefa)
+        }
+        for(var i = 0; i < tarefas.length; i++){
+            str += '<li id="li' + i + '">' + tarefas[i] + "</li>" + `<button onclick='concluir(${i})'>Concluir</button>`
+        }
+        lista.innerHTML = str
+        str = ''
+    }
+
+    function concluir(i){
+
+        tarefas.splice(i, 1)
+
+        for(var i = 0; i < tarefas.length; i++){
+            str += '<li id="li' + i + '">' + tarefas[i] + "</li>" + `<button onclick='concluir(${i})'>Concluir</button>`
+        }
+        lista.innerHTML = str
+        str = ''
+        
+    }
+
+    function resultado(){
+        let n1 = parseFloat(document.getElementById('op1').value)
+        let n2 = parseFloat(document.getElementById('op2').value)
+        let opr = document.getElementById('operador').value
+        let resultado = document.getElementById('resultado')
+  
+        switch(opr){
+            case '+':
+                resultado.innerText = `${n1+n2}`
+                break
+            case '-':
+                resultado.innerText = `${n1-n2}`
+                break
+            case '*':
+                resultado.innerText = `${n1*n2}`
+                break
+            case '/':
+                if ( n2 != 0){
+                    resultado.innerText = `${n1/n2}`
+                } else {
+                    resultado.innerText = "Divisão por zero"
+                }
+                break
+            case '**':
+                resultado.innerText = `${n1**n2}`
+                break
+            default: break;
+        }
+    }
+
+function limpar2(){
+    let resultado = document.getElementById('resultado')
+    resultado.innerText = ''
+}
+</script>
+</body>
+</html>

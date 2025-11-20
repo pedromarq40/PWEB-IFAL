@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .corpo{
+            border: 2px solid black;
+        }
+        .titulo{
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="titulo text-center text-white m-2 p-3">Quiz</h1>
+
+    <div class="corpo container mt-5">
+
+        <div id='Caixa_Quiz' class="card p-3">
+        </div>
+
+        <button class='btn btn-primary' id="submeter">Responder</button>
+        <h3 id="pontuacao"></h3>
+    </div>
+    <script>
+
+        class Pergunta{
+
+            constructor(pergunta, opcoes, correta){
+                this.pergunta = pergunta
+                this.opcoes = opcoes
+                this.correta = correta
+            }
+        }
+
+        const perguntas = [
+            new Pergunta('Qual alimento nunca estraga naturalmente?', ['Arroz', 'Mel', 'Farinha', 'Batata'], 'Mel'),
+            new Pergunta('Qual planeta do sistema solar gira ao contrario?', ['Jupiter', 'Marte', 'Venus', 'Saturno'], 'Venus'),
+            new Pergunta('Qual dos sete problemas do milênio ja foi resolvido?', ['Conjectura de Poincare', 'Hipotese de Riemann', 'Teoria de Yang', 'Problema de Yang-Mills'], 'Conjectura de Poincare'),
+            new Pergunta('Qual a tribo do lutador de MMA Alex Poatan?', ['Tupi' , 'Marajoara', 'Tupinamba', 'Tapaxo'], 'Tapaxo'),
+            new Pergunta('Qual o maior Pais da Africa?', ['Republica Democratica do Congo', 'Angola','Argelia','Republica Centro-Africana'], 'Argelia')
+        ] 
+
+        const Caixa_Quiz = document.getElementById('Caixa_Quiz')
+        const Submeter = document.getElementById('submeter')
+        const Pontuacao = document.getElementById('pontuacao')
+
+        Submeter.addEventListener('click', function(){
+
+
+            let html = 'Acertos: '
+
+            var Acertos = 0
+           
+            let lista_de_respostas = document.querySelectorAll('.resposta-correta')
+
+            lista_de_respostas.forEach((input, index) => {
+                if (input.checked) {
+                Acertos++;
+                html += `Questão ${index + 1}, `
+                }
+            })
+
+            Pontuacao.innerHTML = `${Acertos}/5 ` + html
+            Acertos = 0
+        })
+
+        perguntas.forEach(function(item,index,array){
+
+            let html = `<h5>${item.pergunta}</h5>` + "<br>"
+
+            for(let i = 0; i < 4; i++){
+                if(item.opcoes[i] == array[index].correta){
+                    html +=
+                    `<div class="form-check">
+                        <input id='${item.opcoes[i].split(' ').join('')}' 
+                        type="radio" class="form-check-input resposta-correta" name="pergunta-${index}"> 
+                        <label for='${item.opcoes[i].split(' ').join('')}'>${item.opcoes[i]}</label>
+                    </div>`
+
+                } else {
+                    html +=
+                    `<div class="form-check">
+                        <input id='${item.opcoes[i].split(' ').join('')}'
+                        class="form-check-input" type="radio" name="pergunta-${index}">
+                        <label for='${item.opcoes[i].split(' ').join('')}'>${item.opcoes[i]}</label>
+                    </div>`
+                }
+            }
+            Caixa_Quiz.innerHTML += html + "<hr>"
+        })
+
+
+    </script>
+</body>
+</html>

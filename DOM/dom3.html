@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .azul{
+        background-color: blue;
+    }
+    .vermelho{
+        background-color: red;
+    }
+    div{
+        width: 100px;
+        height: 100px;
+        border: 2px solid black;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 10px
+    }
+</style>
+<body>
+
+    <div id="caixa1">OI</div>
+    <div id="caixa2">OI</div>
+    <div id="caixa3">OI</div>
+    <div id="caixa4">OI</div>
+    <div id="caixa5">OI</div>
+    <div id="caixa6">OI</div>
+    <div id="caixa7">OI</div>
+    <button onclick="pergunta()">Mudar cor</button>
+
+    
+</body>
+<script>
+
+    let cont = 1
+
+    function pergunta(){
+
+        for(let i = 1; i < 8; i++){
+            let caixa = document.getElementById(`caixa${i}`)
+        
+            if (cont % 2 == 0){
+                caixa.classList.remove('vermelho')
+                caixa.classList.add('azul')
+            } else if ( cont == 1) {
+                caixa.classList.add('vermelho')
+            } else {
+                caixa.classList.remove('azul')
+                caixa.classList.add('vermelho')
+            }
+        }
+        cont++
+    }
+</script>
+</html>

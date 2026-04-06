@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul id="lista"></ul>
+    <input type="text" id="Tarefa">
+    <button id="botão">Adicionar Tarefas</button>
+
+    <button id="sla"></button>
+
+</body>
+<script>
+
+    let botão = document.getElementById('botão')
+    let tarefas = []
+    let lista = document.getElementById('lista')
+
+    const CHAVE_STORAGE = 'minhasTarefasSalvas'; // NOVO: Define um "nome" (chave) para nossos dados no localStorage
+
+    
+    function salvarTarefas() {
+    // Converte nosso array 'tarefas' em uma string JSON e salva
+        localStorage.setItem(CHAVE_STORAGE, JSON.stringify(tarefas));
+    }
+
+
+    function carregarTarefas() {
+    // Pega os dados salvos (vem como string)
+        const tarefasSalvas = localStorage.getItem(CHAVE_STORAGE);
+
+    // Se houver dados salvos (não for null)...
+        if (tarefasSalvas) {
+            // Converte a string de volta para um array e coloca no nosso 'tarefas'
+            tarefas = JSON.parse(tarefasSalvas);
+        }
+    }
+
+
+    function renderizar(){
+
+        let html = ''
+
+        for(let i = 0; i < tarefas.length; i++){
+            html += `<li id="${i}">${tarefas[i]} <button onclick="remover(${i})">Remover Tarefa</button></li>`
+        }
+
+        lista.innerHTML = html
+        html = ''
+
+    }
+
+
+    botão.addEventListener('click', function () {
+
+        let tarefa = document.getElementById('Tarefa').value
+
+        if (tarefa != ''){
+            tarefas.push(tarefa)
+            salvarTarefas()
+        }
+
+        renderizar()
+        document.getElementById('Tarefa').value = ''
+    })
+
+    
+    function remover(i){
+
+        tarefas.splice(i, 1)
+        renderizar()
+        salvarTarefas()
+
+    }
+
+    // --- ADICIONADO AQUI ---
+    // Inicialização: Carrega e renderiza os dados salvos ao abrir a página
+    carregarTarefas()
+    renderizar()
+
+</script>
+</html>

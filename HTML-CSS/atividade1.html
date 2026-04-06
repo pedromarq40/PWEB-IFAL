@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alinhamento com Flex</title>
+    <style>
+        .caixa {
+            border: 2px solid black;
+            background-color: lightgray;
+            width: 170px;
+            height: 90px;
+            margin: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+
+            /* Alinhamento dos elementos .corpo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .corpo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex; /* Centraliza o conteúdo interno */
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .corpo p {
+            margin: 0;
+            font-size: 25px; /* Ajuste conforme necessário */
+            text-align: center;
+        }
+
+        .notificação , .notificação1 {
+            background-color: red;
+            display: flex;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            right: 3px;
+            top: 1px;
+
+        }
+
+        .notificação1{
+            right: 0px;
+            left: 3px;
+            top: -7px;
+        }
+
+        .pesquisa{
+        width: 500px;
+        margin-top: 50px;
+        border: 2px solid gray;
+        height: 30px;
+        border-radius: 10%;
+        background-color: lightgray;
+        position: relative;
+        }
+
+        .caixa-pesquisa{
+        position: relative;
+        /*border: 2px solid black;*/
+        width: 500px;
+        }
+
+        .lupa{
+        position: absolute;
+        bottom: -21px;
+        right: 5px;
+        font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="caixa">
+        <div class="corpo">
+            <p>🔔</p>
+            <div class="notificação">2</div>
+        </div>
+        <div class="corpo">
+            <p>✉️</p>
+            <div class="notificação">6</div>
+        </div>
+    </div>
+
+
+    <div class="caixa">
+        <div class="corpo">
+            <p>🔔</p>
+            <div class="notificação1">3</div>
+        </div>
+        <div class="corpo">
+            <p>✉️</p>
+            <div class="notificação1">9</div>
+        </div>
+    </div>
+
+    <div class="caixa-pesquisa">
+    <input class="pesquisa">
+    <p class="lupa">🔍︎</p>
+    </div>
+    </body>
+</body>
+</html>
+

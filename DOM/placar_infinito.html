@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placar Avançado - Goleada</title>
+  <link rel="stylesheet" href="styles.css"> 
+  
+  <style>
+    /* * O CSS avançado está no arquivo styles.css (conforme a resposta anterior).
+     * Mantenha o link acima. 
+     */
+     
+     /* Estilo temporário para o botão de GOL */
+     button {
+        margin-top: 30px;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        background-color: #28a745; /* Verde de GOL! */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.5);
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div id="scoreboard">
+    <div class="team home">
+      <span class="team-name">BRASIL</span>
+      <span class="score" id="score-home">2</span> </div>
+
+    <div class="separator">
+      <span class="vs">X</span>
+    </div>
+
+    <div class="team away">
+      <span class="score" id="score-away">3</span> <span class="team-name">JAPÃO</span>
+    </div>
+  </div>
+
+  <button onclick="marcarDezGols()">Golaço! 10 Gols do Brasil de uma Vez!</button>
+</body>
+<script>
+  // Inicialização das variáveis com os placares atuais
+  let placarBrasil = 2;
+  let placarJapao = 3; // O placar do Japão permanece fixo
+  
+  const scoreHomeElement = document.getElementById('score-home');
+  const scoreAwayElement = document.getElementById('score-away');
+
+  // Garante que o placar inicial esteja correto no carregamento
+  scoreHomeElement.innerText = placarBrasil;
+  scoreAwayElement.innerText = placarJapao;
+
+  /**
+   * Função principal para marcar 10 gols de uma vez só.
+   */
+  function marcarDezGols() {
+    // Desativa o botão para evitar cliques múltiplos durante a animação
+    const button = document.querySelector('button');
+    button.disabled = true;
+
+    // A classe 'scored' aciona a animação de 'bump' no CSS (que você já tem)
+    scoreHomeElement.classList.add('scored');
+
+    // Remove a classe 'scored' após 0.5s (duração da animação)
+    setTimeout(() => {
+        scoreHomeElement.classList.remove('scored');
+    }, 500);
+
+    // O loop para adicionar os 10 gols
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        placarBrasil++; // Incrementa o placar do Brasil
+        scoreHomeElement.innerText = placarBrasil; // Atualiza o placar na tela
+
+        // Animação de "flash" rápido a cada gol, dando a sensação de subida rápida
+        scoreHomeElement.style.color = 'green';
+        scoreHomeElement.style.transform = 'scale(1.1)';
+        
+        setTimeout(() => {
+            // Volta para o estilo padrão depois de um instante
+            scoreHomeElement.style.color = ''; // Volta à cor padrão do CSS
+            scoreHomeElement.style.transform = ''; // Volta ao tamanho normal
+        }, 50);
+
+        // Se for o último gol, reativa o botão
+        if (i === 9) {
+             button.disabled = false;
+        }
+
+      }, i * 150); // Intervalo de 150ms entre cada um dos 10 gols
+    }
+  }
+
+  // Removemos o setInterval(a, 0.001) para manter a performance e o controle total com o botão.
+</script>
+</html>
